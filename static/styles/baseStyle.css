@@ -1,0 +1,17 @@
+*
+{
+	margin:0;
+	padding:0;
+}
+
+#bosch.color{
+	position: absolute
+}
+
+#logo{
+	position:absolute;
+	top:35px;
+	float:left;
+	margin-left:35px;
+	max-height:50px;
+}

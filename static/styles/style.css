@@ -1,0 +1,63 @@
+
+button.startDemo{
+position: absolute;
+top:450px;
+left: 720px;
+height: 35px;
+max-width:120px;
+border-radius: 3px;
+}
+button.startDemo:hover{
+background-color: greenyellow;
+font-stretch: expanded;
+color: black;
+
+}
+
+body
+{
+background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url("../images/bc.jpg");
+height: 100vh;
+background-size: cover;
+background-position: center;
+
+}
+.main-nav
+{
+float: right;
+list-style: none;
+margin-top: 30px;
+margin-right: 50px;
+}
+.main-nav ul{
+background-color: aliceblue
+}
+.main-nav li
+{
+display: inline;
+}
+
+
+.main-nav li a
+{
+
+padding: 5px 5px;
+font-family: "Roboto", sans-serif;
+font-size: 15px;
+color: white;
+text-decoration: none;
+}
+
+.main-nav li.active a
+{
+border: 1px solid white;
+}
+.main-nav li a:hover
+{
+border: 1px solid white;
+background-color: lavender;
+color: black;
+text-decoration: none;
+border-radius: 3px
+
+}

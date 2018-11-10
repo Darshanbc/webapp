@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+<title>
+Agricert Demo
+</title>
+    </head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="{{url_for('static',filename='styles/login_style.css')}}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script  src="{{url_for('static',filename='js/index.js')}}"></script>
+    <link href="{{url_for('static',filename='styles/style.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static',filename='styles/baseStyle.css')}}" rel="stylesheet" type="text/css">
+    <body>
+        <!-- <img id="bosch-color" src="{{url_for('static',filename='images/Bosch-color.png')}}">
+<img id="logo" src="{{url_for('static',filename='images/logo_bosch.jpg')}}" style="left:0px"> -->
+<ul class="main-nav">
+<!-- <li><a href="">HOME</a></li>
+<li><a href="">DEMO</a></li> -->
+</ul>
+    <div  class="form">
+      
+      <ul class="tab-group">
+        <li id="signupTab" class="tab active"><a href="#signup">Sign Up</a></li>
+        <li id="loginTab" class="tab"><a href="#login">Log In</a></li>
+      </ul>        
+        <DIV class="tab-content">
+            <div id="signup">    
+                <!-- <form id="signup_form" method="post">
+                    {{ form.csrf }} -->
+                    <div class="top-row">
+                        <div class="field-wrap">
+                          <label for="fname">
+                            First Name<span class="req">*</span>
+                          </label>
+                            <input type="text" required autocomplete="off" name="fname"  />
+                        </div>
+                         <div class="field-wrap">
+                          <label for="lname">
+                            Last Name<span class="req">*</span>
+                          </label>
+                          <input type="text"required autocomplete="off" name="lname" />
+                        </div>
+                    </div>
+                    <div class="field-wrap">
+                      <label for="uname">
+                        User Name<span class="req">*</span>
+                      </label>
+                      <input type='text'required autocomplete="off" name="uname" />
+                    </div>
+                    <div class="field-wrap">
+                      <label for="password">
+                        Set A Password<span class="req">*</span>
+                      </label>
+                      <input type="password"required autocomplete="off" name="password" />
+                    </div>
+                    <div class="input submit">
+                        <input id="signup_submit" type="button" value="Submit" class="button button-block" />
+                    </div>
+                    <span style="color: red"></span> <p class="forgot" id="status_message"></p>
+                <!-- </form> -->
+            </div>
+            <div id='login'>
+               <form id='login_form' action="/login" method="POST">
+                {{ form.csrf }}
+                  <div class="top-row">
+
+                </div>
+                  <div class="field-wrap">
+                  <label for="uname">
+                    User Name<span class="req">*</span>
+                  </label> 
+                  <input type="text" id="input_uname" name="uname" required autocomplete="off"/>
+                </div>
+                
+                <div class="field-wrap">
+                  <label for="password">
+                    Password<span class="req">*</span>
+                  </label>
+                  <input type="password" name="password" required autocomplete="off"/>
+                </div>
+                
+               <span style="color: red">{{auth_msg}}</span> <p class="forgot"><a href="#">Forgot Password?</a></p>
+                
+                <button onclick="login_changecss()" class="button button-block"/>Log In</button>
+                
+              </form>
+              
+            </div>
+
+        </DIV>
+
+
+    </div> 
+
+
+
+    </body>
+
+ <script type="text/javascript">
+function login_changecss(){
+  var loginTaab=document.getElementById('loginTab')
+  var signupTab=document.getElementById('signupTab')
+  signupTab.removeClass('active')
+  loginTab.addClass('active')
+}
+$('.form').find('input, textarea').on('keyup blur focus', function (e) {
+  
+  var $this = $(this),
+      label = $this.prev('label');
+
+      if (e.type === 'keyup') {
+            if ($this.val() === '') {
+          label.removeClass('active highlight');
+        } else {
+          label.addClass('active highlight');
+        }
+    } else if (e.type === 'blur') {
+        if( $this.val() === '' ) {
+            label.removeClass('active highlight'); 
+            } else {
+            label.removeClass('highlight');   
+            }   
+    } else if (e.type === 'focus') {
+      
+      if( $this.val() === '' ) {
+            label.removeClass('highlight'); 
+            } 
+      else if( $this.val() !== '' ) {
+            label.addClass('highlight');
+            }
+    }
+
+});
+
+$("#login_form").submit(function(){
+  console.log("excuting login_form")
+  var uname=$("#input_uname").val()
+  console.log('uname is '+uname)
+  sessionStorage.setItem("uname",uname)
+});
+
+$('.tab a').on('click', function (e) {
+  
+  e.preventDefault();
+  
+  $(this).parent().addClass('active');
+  $(this).parent().siblings().removeClass('active');
+  
+  target = $(this).attr('href');
+
+  $('.tab-content > div').not(target).hide();
+  
+  $(target).fadeIn(600);
+  
+});
+
+$("#signup_submit").on('click',function () {
+  // body...
+  console.log("excuting signup_form")
+  var fname=$("input[name=fname]").val()
+  var lname=$("input[name=lname]").val()
+  var uname=$("input[name=uname]").val()
+  var password=$("input[name=password]").val()
+      $.ajax({
+      url:"/register",
+      type:"post",
+      data:{'fname':fname,'lname':lname,'uname':uname,'password':password},
+      success:function (response) {
+        $('#status_message').html(response)
+        // body...
+      }
+    })
+})
+
+
+</script>   
+</html>
